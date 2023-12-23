@@ -282,7 +282,7 @@ void ULoadingScreenManager::ShowLoadingScreen()
 		}
 		else
 		{
-			UE_LOG(LogGUIE, Error, TEXT("Failed to create loading screen widget, please check LoadingScreenSettings->LoadingScreenWidgetClass"));
+			UE_LOG(LogGUIE, Error, TEXT("Failed to create loading screen widget, please check UIDeveloperSettings->LoadingScreenWidgetClass"));
 			
 			// Set alternative slate widget
 			
