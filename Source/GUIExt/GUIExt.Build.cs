@@ -33,8 +33,10 @@ public class GUIExt : ModuleRules
                 "CommonUI",
                 "CommonInput",
                 "GameplayTags",
+                "GameFeatures",
                 "ControlFlows",
                 "DeveloperSettings",
+                "ModularGameplay",
             }
         );
 
