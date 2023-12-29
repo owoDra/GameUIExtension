@@ -10,7 +10,7 @@
 /**
  * Settings for a loading screen system.
  */
-UCLASS(config=Game, defaultconfig, meta=(DisplayName="UI Settings"))
+UCLASS(Config = "Game", Defaultconfig, meta = (DisplayName = "Game UI Extension"))
 class UUIDeveloperSettings : public UDeveloperSettings
 {
 public:

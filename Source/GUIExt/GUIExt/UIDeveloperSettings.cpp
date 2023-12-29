@@ -7,5 +7,6 @@
 
 UUIDeveloperSettings::UUIDeveloperSettings()
 {
-	CategoryName = TEXT("Game UI Extension");
+	CategoryName = TEXT("Game XXX Extension");
+	SectionName = TEXT("Game UI Extension");
 }
