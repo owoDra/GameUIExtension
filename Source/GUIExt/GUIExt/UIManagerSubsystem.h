@@ -1,4 +1,4 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #pragma once
 
@@ -47,5 +47,9 @@ public:
 	virtual void NotifyPlayerAdded(ULocalPlayer* LocalPlayer);
 	virtual void NotifyPlayerRemoved(ULocalPlayer* LocalPlayer);
 	virtual void NotifyPlayerDestroyed(ULocalPlayer* LocalPlayer);
+
+private:
+	void HandleAddLocalPlayer(ULocalPlayer* NewPlayer, FPlatformUserId UserId);
+	void HanldeRemoveLocalPlayer(ULocalPlayer* ExistingPlayer);
 
 };

@@ -1,11 +1,12 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #include "UIManagerSubsystem.h"
 
 #include "UIPolicy.h"
 #include "UIDeveloperSettings.h"
 
-#include "Engine/GameInstance.h"
+#include "System/GFCGameInstance.h"
+
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/HUD.h"
 #include "GameFramework/PlayerController.h"
@@ -17,6 +18,12 @@
 void UUIManagerSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
+
+	if (auto* GI{ Cast<UGFCGameInstance>(GetGameInstance()) })
+	{
+		GI->Register_OnLocalPlayerAdded(UGFCGameInstance::FLocalPlayerAddedDelegate::FDelegate::CreateUObject(this, &ThisClass::HandleAddLocalPlayer));
+		GI->Register_OnLocalPlayerRemoved(UGFCGameInstance::FLocalPlayerRemovedDelegate::FDelegate::CreateUObject(this, &ThisClass::HanldeRemoveLocalPlayer));
+	}
 
 	if (!CurrentPolicy)
 	{
@@ -131,4 +138,12 @@ void UUIManagerSubsystem::NotifyPlayerDestroyed(ULocalPlayer* LocalPlayer)
 }
 
 
+void UUIManagerSubsystem::HandleAddLocalPlayer(ULocalPlayer* NewPlayer, FPlatformUserId UserId)
+{
+	NotifyPlayerAdded(NewPlayer);
+}
 
+void UUIManagerSubsystem::HanldeRemoveLocalPlayer(ULocalPlayer* ExistingPlayer)
+{
+	NotifyPlayerDestroyed(ExistingPlayer);
+}
