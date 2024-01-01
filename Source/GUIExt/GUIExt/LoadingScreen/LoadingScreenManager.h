@@ -117,7 +117,7 @@ public:
 	FString GetShowLoadingScreenReason() const { return ShowLoadingScreenReason; }
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "LoadingScreen")
-	bool GetCurrentlyShowingLoadingScreen() const { return bCurrentlyShowingLoadingScreen; }
+	bool IsCurrentlyShowingLoadingScreen() const { return bCurrentlyShowingLoadingScreen; }
 
 public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
