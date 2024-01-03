@@ -1,4 +1,4 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #pragma once
 
@@ -23,3 +23,8 @@ GUIEXT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_Action_Cancel);
 GUIEXT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_Action_Confirm);
 GUIEXT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_Action_NextTab);
 GUIEXT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_Action_PreviousTab);
+
+////////////////////////////////////
+// UI.Extension.HUDSlot
+
+UE_DECLARE_GAMEPLAY_TAG_EXTERN(TAG_UI_Extension_HUDSlot);

@@ -1,4 +1,4 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #include "GUIETags_UI.h"
 
@@ -21,3 +21,9 @@ UE_DEFINE_GAMEPLAY_TAG(TAG_UI_Action_Cancel, "UI.Action.Cancel");
 UE_DEFINE_GAMEPLAY_TAG(TAG_UI_Action_Confirm, "UI.Action.Confirm");
 UE_DEFINE_GAMEPLAY_TAG(TAG_UI_Action_NextTab, "UI.Action.NextTab");
 UE_DEFINE_GAMEPLAY_TAG(TAG_UI_Action_PreviousTab, "UI.Action.PreviousTab");
+
+
+////////////////////////////////////
+// UI.Extension.HUDSlot
+
+UE_DEFINE_GAMEPLAY_TAG(TAG_UI_Extension_HUDSlot, "UI.Extension.HUDSlot");

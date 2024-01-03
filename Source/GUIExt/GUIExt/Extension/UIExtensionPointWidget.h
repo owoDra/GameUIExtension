@@ -1,4 +1,4 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #pragma once
 
@@ -34,7 +34,7 @@ protected:
 	//
 	// The tag that defines this extension point
 	//
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI Extension")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI Extension", meta = (Categories = "UI.Extension"))
 	FGameplayTag ExtensionPointTag;
 
 	//
