@@ -64,7 +64,6 @@ public:
 private:
 	void ResetExtensionPoint();
 	void RegisterExtensionPoint();
-	void RegisterExtensionPointForPlayerState(UGFCLocalPlayer* LocalPlayer, APlayerState* PlayerState);
 	void OnAddOrRemoveExtension(EUIExtensionAction Action, const FUIExtensionRequest& Request);
 
 };

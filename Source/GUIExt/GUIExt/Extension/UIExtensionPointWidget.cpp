@@ -1,10 +1,9 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #include "UIExtensionPointWidget.h"
 
 #include "Extension/UIExtensionPointSubsystem.h"
-
-#include "Actor/GFCLocalPlayer.h"
+#include "GUIExtLogs.h"
 
 #include "Editor/WidgetCompilerLog.h"
 #include "Misc/UObjectToken.h"
@@ -60,11 +59,6 @@ TSharedRef<SWidget> UUIExtensionPointWidget::RebuildWidget()
 	{
 		ResetExtensionPoint();
 		RegisterExtensionPoint();
-
-		if (auto* GFCLP{ GetOwningLocalPlayer<UGFCLocalPlayer>() })
-		{
-			GFCLP->CallAndRegister_OnPlayerStateSet(UGFCLocalPlayer::FPlayerStateSetDelegate::FDelegate::CreateUObject(this, &ThisClass::RegisterExtensionPointForPlayerState));
-		}
 	}
 
 	if (IsDesignTime())
@@ -133,26 +127,6 @@ void UUIExtensionPointWidget::RegisterExtensionPoint()
 				ExtensionPointTag, 
 				GetOwningLocalPlayer(), 
 				ExtensionPointTagMatch, 
-				AllowedDataClasses,
-				FUIExtensionActionDelegate::CreateUObject(this, &ThisClass::OnAddOrRemoveExtension)
-			)
-		);
-	}
-}
-
-void UUIExtensionPointWidget::RegisterExtensionPointForPlayerState(UGFCLocalPlayer* LocalPlayer, APlayerState* PlayerState)
-{
-	if (auto* ExtensionSubsystem{ GetWorld()->GetSubsystem<UUIExtensionPointSubsystem>() })
-	{
-		TArray<UClass*> AllowedDataClasses;
-		AllowedDataClasses.Add(UUserWidget::StaticClass());
-		AllowedDataClasses.Append(DataClasses);
-
-		ExtensionPointHandles.Add(
-			ExtensionSubsystem->RegisterExtensionPointForContext(
-				ExtensionPointTag, 
-				PlayerState, 
-				ExtensionPointTagMatch,
 				AllowedDataClasses,
 				FUIExtensionActionDelegate::CreateUObject(this, &ThisClass::OnAddOrRemoveExtension)
 			)

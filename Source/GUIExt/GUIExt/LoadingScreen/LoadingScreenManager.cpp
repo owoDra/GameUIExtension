@@ -292,8 +292,11 @@ void ULoadingScreenManager::ShowLoadingScreen()
 		// Add widget to viewport
 
 		auto* GameViewportClient{ LocalGameInstance->GetGameViewportClient() };
-		GameViewportClient->AddViewportWidgetContent(LoadingScreenWidget.ToSharedRef(), Settings->LoadingScreenZOrder);
-
+		if (GameViewportClient)
+		{
+			GameViewportClient->AddViewportWidgetContent(LoadingScreenWidget.ToSharedRef(), Settings->LoadingScreenZOrder);
+		}
+		
 		// Change performance settings
 
 		ChangePerformanceSettings(/*bEnableLoadingScreen =*/ true);
@@ -386,15 +389,18 @@ void ULoadingScreenManager::ChangePerformanceSettings(bool bEnabingLoadingScreen
 	// Disable world rendering
 
 	auto* GameViewportClient{ GetGameInstance()->GetGameViewportClient() };
-	GameViewportClient->bDisableWorldRendering = bEnabingLoadingScreen;
-
-	// Change streaming priority within a level
-
-	if (auto* ViewportWorld{ GameViewportClient->GetWorld() })
+	if (GameViewportClient)
 	{
-		if (auto* WorldSettings{ ViewportWorld->GetWorldSettings(false, false) })
+		GameViewportClient->bDisableWorldRendering = bEnabingLoadingScreen;
+
+		// Change streaming priority within a level
+
+		if (auto* ViewportWorld{ GameViewportClient->GetWorld() })
 		{
-			WorldSettings->bHighPriorityLoadingLocal = bEnabingLoadingScreen;
+			if (auto * WorldSettings{ ViewportWorld->GetWorldSettings(false, false) })
+			{
+				WorldSettings->bHighPriorityLoadingLocal = bEnabingLoadingScreen;
+			}
 		}
 	}
 

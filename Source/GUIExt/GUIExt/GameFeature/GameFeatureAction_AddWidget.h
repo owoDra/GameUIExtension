@@ -1,4 +1,4 @@
-// Copyright (C) 2023 owoDra
+﻿// Copyright (C) 2023 owoDra
 
 #pragma once
 
@@ -59,7 +59,7 @@ public:
 	//
 	// The slot ID where we should place this widget
 	//
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (Categories = "UI.Extension.HUDSlot"))
 	FGameplayTag SlotID;
 
 };
