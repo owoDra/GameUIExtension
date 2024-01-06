@@ -220,8 +220,10 @@ bool ULoadingScreenManager::ShouldShowLoadingScreen()
 	{
 		// Disable world rendering 
 
-		auto* GameViewportClient{ GetGameInstance()->GetGameViewportClient() };
-		GameViewportClient->bDisableWorldRendering = false;
+		if (auto* GameViewportClient{ GetGameInstance()->GetGameViewportClient() })
+		{
+			GameViewportClient->bDisableWorldRendering = false;
+		}
 
 		ShowLoadingScreenReason = FString::Printf(TEXT("Additional display for texture streaming after loading is complete (%.2f sec)"), HoldLoadingScreenAdditionalSecs);
 		return true;

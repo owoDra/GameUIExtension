@@ -16,7 +16,7 @@ bool ILoadingProcessInterface::ShouldShowLoadingScreen(UObject* TestObject, FStr
 			FString ObserverReason;
 			if (LoadObserver->ShouldShowLoadingScreen(ObserverReason))
 			{
-				if (!ObserverReason.IsEmpty())
+				if (ObserverReason.IsEmpty())
 				{
 					UE_LOG(LogGUIE, Warning, TEXT("[%s] The reason for displaying the loading screen was not set"), *GetPathNameSafe(TestObject));
 				}
