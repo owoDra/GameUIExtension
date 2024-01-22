@@ -1,11 +1,12 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #include "GameFeatureAction_AddWidget.h"
 
 #include "Extension/UIExtensionPointSubsystem.h"
 #include "UIFunctionLibrary.h"
 
-#include "Actor/GFCHUD.h"
+#include "InitState/InitStateComponent.h"
+#include "Actor/GFCPlayerController.h"
 
 #include "Components/GameFrameworkComponentManager.h"
 #include "GameFeaturesSubsystemSettings.h"
@@ -110,8 +111,7 @@ void UGameFeatureAction_AddWidgets::AddToWorld(const FWorldContext& WorldContext
 	{
 		if (auto* Manager{ UGameInstance::GetSubsystem<UGameFrameworkComponentManager>(GameInstance) })
 		{
-			auto HUDActorClass{ AGFCHUD::StaticClass() };
-			auto ExtensionRequestHandle{ Manager->AddExtensionHandler(HUDActorClass, UGameFrameworkComponentManager::FExtensionHandlerDelegate::CreateUObject(this, &ThisClass::HandleActorExtension, ChangeContext)) };
+			auto ExtensionRequestHandle{ Manager->AddExtensionHandler(AGFCPlayerController::StaticClass(), UGameFrameworkComponentManager::FExtensionHandlerDelegate::CreateUObject(this, &ThisClass::HandleActorExtension, ChangeContext)) };
 			
 			ActiveData.ComponentRequests.Add(ExtensionRequestHandle);
 		}
@@ -140,7 +140,7 @@ void UGameFeatureAction_AddWidgets::HandleActorExtension(AActor* Actor, FName Ev
 	{
 		RemoveWidgets(Actor, ActiveData);
 	}
-	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == UGameFrameworkComponentManager::NAME_GameActorReady))
+	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == AGFCPlayerController::NAME_PlayerStateReady))
 	{
 		AddWidgets(Actor, ActiveData);
 	}
@@ -148,9 +148,16 @@ void UGameFeatureAction_AddWidgets::HandleActorExtension(AActor* Actor, FName Ev
 
 void UGameFeatureAction_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& ActiveData)
 {
-	if (auto* HUD{ Cast<AGFCHUD>(Actor) })
+	auto* PC{ Cast<AGFCPlayerController>(Actor) };
+
+	if (PC && PC->IsLocalPlayerController() && PC->GetPlayerState<APlayerState>())
 	{
-		if (auto* LocalPlayer{ Cast<ULocalPlayer>(HUD->GetOwningPlayerController()->Player) })
+		if (!ActiveData.ExtensionHandles.IsEmpty() || !ActiveData.LayoutsAdded.IsEmpty())
+		{
+			return;
+		}
+
+		if (auto* LocalPlayer{ PC->GetLocalPlayer() })
 		{
 			for (const auto& Entry : Layout)
 			{
@@ -160,7 +167,7 @@ void UGameFeatureAction_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& A
 				}
 			}
 
-			auto* ExtensionSubsystem{ HUD->GetWorld()->GetSubsystem<UUIExtensionPointSubsystem>() };
+			auto* ExtensionSubsystem{ PC->GetWorld()->GetSubsystem<UUIExtensionPointSubsystem>() };
 
 			for (const auto& Entry : Widgets)
 			{
@@ -172,7 +179,9 @@ void UGameFeatureAction_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& A
 
 void UGameFeatureAction_AddWidgets::RemoveWidgets(AActor* Actor, FPerContextData& ActiveData)
 {
-	if (auto* HUD{ Cast<AGFCHUD>(Actor) })
+	auto* PC{ Cast<AGFCPlayerController>(Actor) };
+
+	if (PC && PC->IsLocalPlayerController())
 	{
 		for (const auto& AddedLayout : ActiveData.LayoutsAdded)
 		{
