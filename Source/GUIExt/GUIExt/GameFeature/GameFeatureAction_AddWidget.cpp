@@ -6,7 +6,7 @@
 #include "UIFunctionLibrary.h"
 
 #include "InitState/InitStateComponent.h"
-#include "Actor/GFCPlayerController.h"
+#include "Player/GFCPlayerController.h"
 
 #include "Components/GameFrameworkComponentManager.h"
 #include "GameFeaturesSubsystemSettings.h"

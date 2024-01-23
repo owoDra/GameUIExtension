@@ -6,7 +6,7 @@
 #include "UIPolicy.h"
 #include "GUIExtLogs.h"
 
-#include "Actor/GFCLocalPlayer.h"
+#include "Player/GFCLocalPlayer.h"
 
 #include "Engine/GameInstance.h"
 #include "Kismet/GameplayStatics.h"

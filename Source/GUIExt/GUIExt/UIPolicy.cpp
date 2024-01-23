@@ -6,7 +6,7 @@
 #include "UILayout.h"
 #include "GUIExtLogs.h"
 
-#include "Actor/GFCLocalPlayer.h"
+#include "Player/GFCLocalPlayer.h"
 
 #include "Framework/Application/SlateApplication.h"
 #include "Engine/GameInstance.h"

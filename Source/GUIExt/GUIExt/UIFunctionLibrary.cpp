@@ -6,7 +6,7 @@
 #include "UIPolicy.h"
 #include "UILayout.h"
 
-#include "Actor/GFCLocalPlayer.h"
+#include "Player/GFCLocalPlayer.h"
 
 #include "CommonActivatableWidget.h"
 #include "Widgets/CommonActivatableWidgetContainer.h"
