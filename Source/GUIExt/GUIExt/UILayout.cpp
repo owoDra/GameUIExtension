@@ -43,7 +43,7 @@ void UUILayout::SetIsDormant(bool InDormant)
 	{
 		const auto* LP{ GetOwningLocalPlayer() };
 
-		UE_LOG(LogGUIE, Log, TEXT("%s UILayout Dormancy changed for [%d] from [%s] to [%s]"),
+		UE_LOG(LogGameExt_UI, Log, TEXT("%s UILayout Dormancy changed for [%d] from [%s] to [%s]"),
 			LP && LP->IsPrimaryPlayer() ? TEXT("[Primary]") : TEXT("[Non-Primary]"),
 			LP ? LP->GetControllerId() : -1,
 			bIsDormant ? TEXT("Dormant") : TEXT("Not-Dormant"),

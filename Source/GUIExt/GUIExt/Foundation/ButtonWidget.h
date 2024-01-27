@@ -8,7 +8,7 @@
 
 
 UCLASS(Abstract, BlueprintType, Blueprintable)
-class UButtonWidget : public UCommonButtonBase
+class GUIEXT_API UButtonWidget : public UCommonButtonBase
 {
 	GENERATED_BODY()
 public:

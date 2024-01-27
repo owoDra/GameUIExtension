@@ -42,19 +42,19 @@ FUIExtensionPointHandle UUIExtensionPointSubsystem::RegisterExtensionPointForCon
 {
 	if (!ExtensionPointTag.IsValid())
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to register an invalid extension point."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to register an invalid extension point."));
 		return FUIExtensionPointHandle();
 	}
 
 	if (!ExtensionCallback.IsBound())
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to register an invalid extension point."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to register an invalid extension point."));
 		return FUIExtensionPointHandle();
 	}
 
 	if (AllowedDataClasses.Num() == 0)
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to register an invalid extension point."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to register an invalid extension point."));
 		return FUIExtensionPointHandle();
 	}
 
@@ -66,7 +66,7 @@ FUIExtensionPointHandle UUIExtensionPointSubsystem::RegisterExtensionPointForCon
 	Entry->AllowedDataClasses			= AllowedDataClasses;
 	Entry->Callback						= MoveTemp(ExtensionCallback);
 
-	UE_LOG(LogGUIE, Log, TEXT("Extension Point [%s] Registered"), *ExtensionPointTag.ToString());
+	UE_LOG(LogGameExt_UI, Log, TEXT("Extension Point [%s] Registered"), *ExtensionPointTag.ToString());
 
 	NotifyExtensionPointOfExtensions(Entry);
 
@@ -88,13 +88,13 @@ FUIExtensionHandle UUIExtensionPointSubsystem::RegisterExtensionAsData(const FGa
 {
 	if (!ExtensionPointTag.IsValid())
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to register an invalid extension."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to register an invalid extension."));
 		return FUIExtensionHandle();
 	}
 
 	if (!Data)
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to register an invalid extension."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to register an invalid extension."));
 		return FUIExtensionHandle();
 	}
 
@@ -107,11 +107,11 @@ FUIExtensionHandle UUIExtensionPointSubsystem::RegisterExtensionAsData(const FGa
 
 	if (ContextObject)
 	{
-		UE_LOG(LogGUIE, Log, TEXT("Extension [%s] @ [%s] Registered"), *GetNameSafe(Data), *ExtensionPointTag.ToString());
+		UE_LOG(LogGameExt_UI, Log, TEXT("Extension [%s] @ [%s] Registered"), *GetNameSafe(Data), *ExtensionPointTag.ToString());
 	}
 	else
 	{
-		UE_LOG(LogGUIE, Log, TEXT("Extension [%s] for [%s] @ [%s] Registered"), *GetNameSafe(Data), *GetNameSafe(ContextObject), *ExtensionPointTag.ToString());
+		UE_LOG(LogGameExt_UI, Log, TEXT("Extension [%s] for [%s] @ [%s] Registered"), *GetNameSafe(Data), *GetNameSafe(ContextObject), *ExtensionPointTag.ToString());
 	}
 
 	NotifyExtensionPointsOfExtension(EUIExtensionAction::Added, Entry);
@@ -132,11 +132,11 @@ void UUIExtensionPointSubsystem::UnregisterExtension(const FUIExtensionHandle& E
 		{
 			if (Extension->ContextObject.IsExplicitlyNull())
 			{
-				UE_LOG(LogGUIE, Log, TEXT("Extension [%s] @ [%s] Unregistered"), *GetNameSafe(Extension->Data), *Extension->ExtensionPointTag.ToString());
+				UE_LOG(LogGameExt_UI, Log, TEXT("Extension [%s] @ [%s] Unregistered"), *GetNameSafe(Extension->Data), *Extension->ExtensionPointTag.ToString());
 			}
 			else
 			{
-				UE_LOG(LogGUIE, Log, TEXT("Extension [%s] for [%s] @ [%s] Unregistered"), *GetNameSafe(Extension->Data), *GetNameSafe(Extension->ContextObject.Get()), *Extension->ExtensionPointTag.ToString());
+				UE_LOG(LogGameExt_UI, Log, TEXT("Extension [%s] for [%s] @ [%s] Unregistered"), *GetNameSafe(Extension->Data), *GetNameSafe(Extension->ContextObject.Get()), *Extension->ExtensionPointTag.ToString());
 			}
 
 			NotifyExtensionPointsOfExtension(EUIExtensionAction::Removed, Extension);
@@ -151,7 +151,7 @@ void UUIExtensionPointSubsystem::UnregisterExtension(const FUIExtensionHandle& E
 	}
 	else
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to unregister an invalid Handle."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to unregister an invalid Handle."));
 	}
 }
 
@@ -165,7 +165,7 @@ void UUIExtensionPointSubsystem::UnregisterExtensionPoint(const FUIExtensionPoin
 
 		if (auto* ListPtr{ ExtensionPointMap.Find(ExtensionPoint->ExtensionPointTag) })
 		{
-			UE_LOG(LogGUIE, Log, TEXT("Extension Point [%s] Unregistered"), *ExtensionPoint->ExtensionPointTag.ToString());
+			UE_LOG(LogGameExt_UI, Log, TEXT("Extension Point [%s] Unregistered"), *ExtensionPoint->ExtensionPointTag.ToString());
 
 			ListPtr->RemoveSwap(ExtensionPoint);
 
@@ -177,7 +177,7 @@ void UUIExtensionPointSubsystem::UnregisterExtensionPoint(const FUIExtensionPoin
 	}
 	else
 	{
-		UE_LOG(LogGUIE, Warning, TEXT("Trying to unregister an invalid Handle."));
+		UE_LOG(LogGameExt_UI, Warning, TEXT("Trying to unregister an invalid Handle."));
 	}
 }
 

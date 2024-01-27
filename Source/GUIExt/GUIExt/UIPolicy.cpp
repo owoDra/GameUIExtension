@@ -23,7 +23,7 @@ UUIPolicy::UUIPolicy(const FObjectInitializer& ObjectInitializer)
 
 void UUIPolicy::AddLayoutToViewport(ULocalPlayer* LocalPlayer, UUILayout* Layout)
 {
-	UE_LOG(LogGUIE, Log, TEXT("[%s] is adding player [%s]'s root layout [%s] to the viewport"), *GetName(), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
+	UE_LOG(LogGameExt_UI, Log, TEXT("[%s] is adding player [%s]'s root layout [%s] to the viewport"), *GetName(), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
 
 	Layout->SetPlayerContext(FLocalPlayerContext(LocalPlayer));
 	Layout->AddToPlayerScreen(1000);
@@ -37,13 +37,13 @@ void UUIPolicy::RemoveLayoutFromViewport(ULocalPlayer* LocalPlayer, UUILayout* L
 
 	if (LayoutSlateWidget.IsValid())
 	{
-		UE_LOG(LogGUIE, Log, TEXT("[%s] is removing player [%s]'s root layout [%s] from the viewport"), *GetName(), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
+		UE_LOG(LogGameExt_UI, Log, TEXT("[%s] is removing player [%s]'s root layout [%s] from the viewport"), *GetName(), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
 
 		Layout->RemoveFromParent();
 
 		if (LayoutSlateWidget.IsValid())
 		{
-			UE_LOG(LogGUIE, Log, TEXT("Player [%s]'s root layout [%s] has been removed from the viewport, but other references to its underlying Slate widget still exist. Noting in case we leak it."), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
+			UE_LOG(LogGameExt_UI, Log, TEXT("Player [%s]'s root layout [%s] has been removed from the viewport, but other references to its underlying Slate widget still exist. Noting in case we leak it."), *GetNameSafe(LocalPlayer), *GetNameSafe(Layout));
 		}
 
 		OnRootLayoutRemovedFromViewport(LocalPlayer, Layout);

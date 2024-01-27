@@ -20,23 +20,15 @@ public class GUIExt : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",
-                "CoreUObject",
-                "Engine",
-                "Slate",
-                "SlateCore",
-                "InputCore",
-                "UMG",
-                "PreLoadScreen",
-                "RenderCore",
-                "ApplicationCore",
-                "CommonUI",
-                "CommonInput",
+                "Core", "CoreUObject", "Engine",
+
+                "Slate", "SlateCore", "UMG",
+
+                "CommonUI", "CommonInput",
+                
                 "GameplayTags",
-                "GameFeatures",
-                "ControlFlows",
-                "DeveloperSettings",
-                "ModularGameplay",
+
+                "GFCore",
             }
         );
 
@@ -44,7 +36,11 @@ public class GUIExt : ModuleRules
         PrivateDependencyModuleNames.AddRange(
             new string[]
             {
-                "GFCore",
+                "DeveloperSettings",
+
+                "InputCore",
+
+                "GameFeatures", "ModularGameplay",
             }
         );
     }

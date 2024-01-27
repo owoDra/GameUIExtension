@@ -2,4 +2,4 @@
 
 #include "GUIExtLogs.h"
 
-DEFINE_LOG_CATEGORY(LogGUIE);
+DEFINE_LOG_CATEGORY(LogGameExt_UI);
