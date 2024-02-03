@@ -1,4 +1,4 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #include "HUDLayout.h"
 
@@ -14,6 +14,7 @@
 UHUDLayout::UHUDLayout(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	EscapeMenuInputTag = TAG_UI_Action_Escape;
 }
 
 
@@ -21,7 +22,22 @@ void UHUDLayout::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	RegisterUIActionBinding(FBindUIActionArgs(FUIActionTag::ConvertChecked(TAG_UI_Action_Escape), false, FSimpleDelegate::CreateUObject(this, &ThisClass::HandleEscapeAction)));
+	if (bUseEnhancedInput)
+	{
+		if (!EscapeMenuInputAction.IsNull())
+		{
+			auto* InputAction{ EscapeMenuInputAction.IsValid() ? EscapeMenuInputAction.Get() : EscapeMenuInputAction.LoadSynchronous() };
+
+			RegisterUIActionBinding(FBindUIActionArgs(InputAction, false, FSimpleDelegate::CreateUObject(this, &ThisClass::HandleEscapeAction)));
+		}
+	}
+	else
+	{
+		if (EscapeMenuInputTag.IsValid())
+		{
+			RegisterUIActionBinding(FBindUIActionArgs(FUIActionTag::ConvertChecked(TAG_UI_Action_Escape), false, FSimpleDelegate::CreateUObject(this, &ThisClass::HandleEscapeAction)));
+		}
+	}
 }
 
 void UHUDLayout::HandleEscapeAction()

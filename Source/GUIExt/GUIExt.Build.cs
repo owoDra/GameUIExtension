@@ -1,4 +1,4 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 using UnrealBuildTool;
 
@@ -38,7 +38,7 @@ public class GUIExt : ModuleRules
             {
                 "DeveloperSettings",
 
-                "InputCore",
+                "InputCore", "EnhancedInput",
 
                 "GameFeatures", "ModularGameplay",
             }

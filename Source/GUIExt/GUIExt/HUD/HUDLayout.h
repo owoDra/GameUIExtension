@@ -1,10 +1,12 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #pragma once
 
 #include "Foundation/ActivatableWidget.h"
 
 #include "HUDLayout.generated.h"
+
+class UInputAction;
 
 
 /**
@@ -18,8 +20,17 @@ public:
 	UHUDLayout(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Game Menu")
 	TSoftClassPtr<UCommonActivatableWidget> EscapeMenuClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Game Menu")
+	bool bUseEnhancedInput{ true };
+
+	UPROPERTY(EditDefaultsOnly, Category = "Game Menu", meta = (EditCondition = "!bUseEnhancedInput"))
+	FGameplayTag EscapeMenuInputTag;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Game Menu", meta = (EditCondition = "bUseEnhancedInput"))
+	TSoftObjectPtr<UInputAction> EscapeMenuInputAction;
 
 public:
 	void NativeOnInitialized() override;
