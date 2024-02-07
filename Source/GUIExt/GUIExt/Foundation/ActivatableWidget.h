@@ -1,4 +1,4 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #pragma once
 
@@ -26,7 +26,7 @@ enum class EWidgetInputMode : uint8
  * An activatable widget that automatically drives the desired input config when activated
  */
 UCLASS(Abstract, Blueprintable)
-class UActivatableWidget : public UCommonActivatableWidget
+class GUIEXT_API UActivatableWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 public:

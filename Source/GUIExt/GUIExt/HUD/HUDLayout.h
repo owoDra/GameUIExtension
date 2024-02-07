@@ -24,12 +24,9 @@ protected:
 	TSoftClassPtr<UCommonActivatableWidget> EscapeMenuClass;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Game Menu")
-	bool bUseEnhancedInput{ true };
-
-	UPROPERTY(EditDefaultsOnly, Category = "Game Menu", meta = (EditCondition = "!bUseEnhancedInput"))
 	FGameplayTag EscapeMenuInputTag;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Game Menu", meta = (EditCondition = "bUseEnhancedInput"))
+	UPROPERTY(EditDefaultsOnly, Category = "Game Menu")
 	TSoftObjectPtr<UInputAction> EscapeMenuInputAction;
 
 public:

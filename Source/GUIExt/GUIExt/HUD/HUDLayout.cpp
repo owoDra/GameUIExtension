@@ -7,6 +7,8 @@
 
 #include "UIFunctionLibrary.h"
 #include "Input/CommonUIInputTypes.h"
+#include "ICommonInputModule.h"
+#include "CommonInputSettings.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(HUDLayout)
 
@@ -22,7 +24,7 @@ void UHUDLayout::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	if (bUseEnhancedInput)
+	if (ICommonInputModule::GetSettings().IsEnhancedInputSupportEnabled())
 	{
 		if (!EscapeMenuInputAction.IsNull())
 		{
