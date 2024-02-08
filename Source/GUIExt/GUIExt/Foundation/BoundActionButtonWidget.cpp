@@ -1,4 +1,4 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #include "BoundActionButtonWidget.h"
 
@@ -17,6 +17,16 @@ void UBoundActionButtonWidget::NativeConstruct()
 
 		HandleInputMethodChanged(InputSubsystem->GetCurrentInputType());
 	}
+}
+
+void UBoundActionButtonWidget::NativeDestruct()
+{
+	if (auto* InputSubsystem{ GetInputSubsystem() })
+	{
+		InputSubsystem->OnInputMethodChangedNative.RemoveAll(this);
+	}
+
+	Super::NativeDestruct();
 }
 
 void UBoundActionButtonWidget::HandleInputMethodChanged(ECommonInputType NewInputMethod)
