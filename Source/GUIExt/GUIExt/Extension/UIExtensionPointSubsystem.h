@@ -20,7 +20,7 @@ DECLARE_DYNAMIC_DELEGATE_TwoParams(FUIExtensionPointActionDelegate, EUIExtension
 /**
  * Subsystems that manage UI extension points
  */
-UCLASS()
+UCLASS(BlueprintType)
 class GUIEXT_API UUIExtensionPointSubsystem : public UWorldSubsystem
 {
 	GENERATED_BODY()
