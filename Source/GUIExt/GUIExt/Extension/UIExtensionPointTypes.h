@@ -1,4 +1,4 @@
-// Copyright (C) 2024 owoDra
+﻿// Copyright (C) 2024 owoDra
 
 #pragma once
 
@@ -220,7 +220,7 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
-	static void Unregister(FUIExtensionHandle& Handle);
+	static void Unregister( UPARAM(ref) FUIExtensionHandle& Handle);
 
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
 	static bool IsValid(const FUIExtensionHandle& Handle);
@@ -240,7 +240,7 @@ public:
 
 public:
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
-	static void Unregister(FUIExtensionPointHandle& Handle);
+	static void Unregister( UPARAM(ref) FUIExtensionPointHandle& Handle);
 
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
 	static bool IsValid(const FUIExtensionPointHandle& Handle);
